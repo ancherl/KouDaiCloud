@@ -1,0 +1,83 @@
+<!-- MV 评论列表 -->
+<wxs src="../WXS/common.wxs" module="commons" />
+<template name="commentslist">
+  <block wx:if="{{hotComments.length > 0}}">
+    <view class="sm_title">热门评论</view>
+    <view class="limg_list rec_list" wx:for="{{hotComments}}" wx:key="{{commentId}}">
+      <view class="rec_avatar">
+        <navigator>
+          <image class="user_avator" src="{{item.user.avatarUrl}}?param=60y60"></image>
+        </navigator>
+      </view>
+      <view class="rec_main" data-index="{{index}}" data-t="0">
+        <view class="rm_header">
+          <view bindtap="commentlike" data-cid="{{item.commentId}}">
+            <text>{{item.likedCount}}</text>
+            <image src="../../Resources/Images/Music/xg.png" wx:if="{{!item.liked}}"></image>
+            <image src="../../Resources/Images/Music/xi.png" wx:if="{{item.liked}}"></image>
+          </view>
+          <view class="fmh_name">{{item.user.nickname}}</view>
+          <view class="fmh_time">{{commons.convertUnixTimestamp(item.time)}}</view>
+        </view>
+
+        <view class="rm_cnt">
+          <text wx:if="{{item.beReplied.length > 0}}">回复 <text class="replyname">@{{item.beReplied[0].user.nickname}}</text>：</text>
+          <view class="WxEmojiView">
+              <text>{{item.content}}</text>
+          </view>
+          <view class="rmc_reply" wx:if="{{item.beReplied.length > 0}}">
+            <text class="replyname">@{{item.beReplied[0].user.nickname}}</text>：
+              <view class="WxEmojiView">
+               <block wx:for="{{item.beReplied[0].content}}" wx:for-item="r" wx:key="">
+                  <block wx:if="{{re.node == 'text'}}">{{re.text}}</block>
+                  <block wx:elif="{{re.node == 'element'}}">
+                    <image class="wxEmoji" src="http://s1.music.126.net/style/web2/emt//emoji_{{re.text}}.png" />
+                  </block>
+                </block>
+              </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:if="{{comments.length>0}}">
+    <view class="sm_title">精彩评论 ({{totalComments}})</view>
+    <view class="limg_list rec_list" wx:for="{{comments}}" wx:key="{{commentId}}">
+      <view class="rec_avatar">
+        <navigator>
+          <image class="user_avator" src="{{item.user.avatarUrl}}?param=60y60"></image>
+        </navigator>
+      </view>
+      <view class="rec_main" data-index="{{index}}" data-t="0">
+        <view class="rm_header">
+          <view bindtap="commentlike" data-cid="{{item.commentId}}">
+            <text>{{item.likedCount}}</text>
+            <image src="../../Resources/Images/Music/xg.png" wx:if="{{!item.liked}}"></image>
+            <image src="../../Resources/Images/Music/xi.png" wx:if="{{item.liked}}"></image>
+          </view>
+          <view class="fmh_name">{{item.user.nickname}}</view>
+          <view class="fmh_time">{{commons.convertUnixTimestamp(item.time)}}</view>
+        </view>
+        <view class="rm_cnt">
+          <text wx:if="{{item.beReplied.length > 0}}">回复 <text class="replyname">@{{item.beReplied[0].user.nickname}}</text>：</text>
+          <view class="WxEmojiView">
+              <text>{{item.content}}</text>
+          </view>
+                    <view class="rmc_reply" wx:if="{{item.beReplied.length > 0}}">
+            <text class="replyname">@{{item.beReplied[0].user.nickname}}</text>：
+              <view class="WxEmojiView">
+               <block wx:for="{{item.beReplied[0].content}}" wx:for-item="r" wx:key="">
+                  <block wx:if="{{re.node == 'text'}}">{{re.text}}</block>
+                  <block wx:elif="{{re.node == 'element'}}">
+                    <image class="wxEmoji" src="http://s1.music.126.net/style/web2/emt//emoji_{{re.text}}.png" />
+                  </block>
+                </block>
+              </view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </block>
+  
+</template>

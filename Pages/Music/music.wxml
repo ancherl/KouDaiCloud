@@ -1,0 +1,137 @@
+<!--Pages/Send/send.wxml-->
+<wxs src="../../WXS/common.wxs" module="commons" />
+
+<view class='search-container'>
+  <image src='../../Resources/Images/Music/microphone.png' class='microphone'></image>
+  <input type='text' placeholder='请输入音乐关键字' placeholder-class='input-placeholder' maxlength='15' bindinput='searchInputEvent' bindconfirm='clickConfirmButton' confirm-type='search' value='{{inputInitialValue}}'></input>
+  <icon class='search' bindtap='searchClickEvent' type='search' size='15'></icon>
+  <icon class='close' type='clear' size='15' style='display:{{clearIconDisplay}}' bindtap='clearClickEvent'></icon>
+<navigator url='../Playing/playing?id={{songId}}'>
+  <image wx:if='{{playing}}' src='../../Resources/Images/Music/play_status.gif' class='play_status'></image>
+<image wx:else='{{!playing}}' src='../../Resources/Images/Music/play_status.png' class='play_status'></image>
+</navigator>
+</view>
+
+<!-- 轮播图  -->
+<swiper class='swiper-container' indicator-dots indicator-color='#a39f99' indicator-active-color='#c20b0d' autoplay circular interval='2000' duration='500' bindchange='bindchange' previous-margin='-10px' next-margin='-10px' easing-function='linear'>
+        <block wx:for='{{albumList}}' wx:key='{{id}}'>
+          <swiper-item>
+            <image src='{{item.blurPicUrl}}' class='slide-image'></image>
+          </swiper-item>
+        </block>
+</swiper>
+<!-- 个人推荐导航 -->
+<view class='rec_nav'>
+  <view>
+    <navigator url='../FM/fm'>
+      <view class='recn_ico'>
+        <image src='../../Resources/Images/Music/cm2_discover_icn_fm.png'></image>
+      </view>
+      私人FM
+    </navigator>
+  </view>
+  <view>
+    <navigator url=''>
+      <view class='recn_ico'>
+         <view class='calendar'>{{thisday}}</view>
+      </view>
+      每日推荐
+    </navigator>
+  </view>
+  <view>
+    <navigator url=''>
+      <view class='recn_ico'>
+        <image src='../../Resources/Images/Music/cm2_discover_icn_upbill.png'></image>
+      </view>
+      排行榜
+    </navigator>
+  </view>
+  <view>
+    <navigator url=''>
+      <view class='recn_ico'>
+        <image src='../../Resources/Images/Music/cm2_discover_icn_songlist.png'></image>
+      </view>
+      歌单
+    </navigator>
+  </view>
+  <view>
+    <navigator url=''>
+      <view class='recn_ico'>
+        <image src='../../Resources/Images/Music/cm2_discover_icn_liveplay.png'></image>
+      </view>
+      直播
+    </navigator>
+  </view>
+</view>
+
+<!-- 精品歌单 -->
+<view class='st_title'>
+  <text>推荐歌单</text>
+</view>
+<view class='flex-boxlist'>
+  <view class='tl_cnt' wx:for='{{hotSongList}}' wx:key='{{id}}'>
+    <navigator url='../PlayList/playlist?pid={{item.id}}'>
+      <view class='cover'>
+        <image src='{{item.coverImgUrl}}' class="music_cover" ></image>
+        <view class='img_playcount'>
+          <image class='playcount' src='../../Resources/Images/Music/p0.png'/><text>{{commons.toFix(item.playCount/10000)}}万</text>
+        </view>
+      </view>
+      <text class='name'>{{item.name}}</text>
+    </navigator>
+  </view>
+</view>
+
+<!-- 精品音乐 -->
+<view class='st_title'>
+  <text>精品音乐</text>
+</view>
+<view class='flex-boxlist'>
+  <view class='tl_cnt' wx:for='{{highQuantityList}}' wx:key='{{id}}'>
+    <navigator url='../PlayList/playlist?pid={{item.id}}&from=toplist'>
+      <view class='cover'>
+        <image src='{{item.coverImgUrl}}' class="music_cover" ></image>
+      </view>
+      <text class='name'>{{item.name}}</text>
+    </navigator>
+  </view>
+</view>
+
+<!-- MV 推荐 -->
+<view class='st_title'>
+  <text>时尚MV</text>
+</view>
+<view class='flex-boxlist'>
+  <view class='tl_cnt' wx:for='{{mvList}}' wx:key='{{id}}'>
+    <navigator url='../MV/MVDetail?mv_id={{item.id}}&from=toplist'>
+      <view class='cover'>
+        <image src='{{item.cover}}' class="music_cover" ></image>
+        <view class='img_mvplayicon'>
+          <image src='../../Resources/Images/Music/mv-play.png'/>
+        </view>
+      </view>
+      <text class='name'>{{item.name}}</text>
+    </navigator>
+  </view>
+</view>
+
+<!-- 最新专辑 -->
+<view class='st_title'>
+  <text>最新专辑</text>
+</view>
+<view class='flex-boxlist'>
+  <view class='tl_cnt' wx:for='{{commons.firArrSelector(albumList, 6)}}' wx:key='{{id}}'>
+    <navigator url='../PlayList/playlist?pid={{item.id}}&from=toplist'>
+      <view class='cover'>
+        <image src='{{item.blurPicUrl}}' class="music_cover" ></image>
+      </view>
+      <text class='name'>{{item.name}}</text>
+    </navigator>
+  </view>
+</view>
+
+<!-- 到底咯 -->
+
+
+
+

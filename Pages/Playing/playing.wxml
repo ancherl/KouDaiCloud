@@ -1,0 +1,163 @@
+<!--Pages/Playing/playing.wxml-->
+<import src='../../Utils/playingpercent.wxml' />
+<import src='../../Utils/lrc.wxml' />
+<wxs src="../../WXS/common.wxs" module="commons" />
+
+<view id='playingpage' class='{{playing?"playing":""}}' style='background-image:url({{commons.extractMusicUrl(music.al.picUrl)}});height:{{windowHeight}}px;'>
+  <view id="playing-zz" hidden="{{showlrc}}">
+    <image src="../../Resources/Images/Music/aag.png" />
+  </view>
+  <view id="playing-main" hidden="{{showlrc}}">
+    <image id="playingmainbg" src="../../Resources/Images/Music/play.png" />
+    <image wx:if='{{music.al.picUrl}}' src="{{music.al.picUrl}}?param=200y200" bindtap="loadlrc" id="pmaincover" />
+  </view>
+  <!-- 歌词显示 -->
+  <template is="lrc" data="{{lrc:lrc,showlrc:showlrc,lrctime:lrctime,toView:toView}}" />
+
+  <view id='playing-actwrap'>
+    <view class='playing-info' wx:if='{{!showlrc}}'>
+      <view class="pi-act" bindtap="songheart">
+        <image src="../../Resources/Images/Music/cm2_play_icn_love.png" wx:if="{{!music.st}}" />
+        <image src="../../Resources/Images/Music/cm2_play_icn_loved.png" wx:if="{{music.st}}" />
+      </view>
+      <view class="pi-act" bindtap="downmusic">
+        <image src="../../Resources/Images/Music/cm2_play_icn_dld.png" />
+      </view>
+      <view class="pi-act commentscount">
+        <navigator url="../recommend/index?id={{music.id}}&from=song">
+          <image wx:if="{{!commentscount}}" src="../../Resources/Images/Music/cm2_play_icn_cmt.png" />
+          <image wx:if="{{commentscount}}" src="../../Resources/Images/Music/cm2_play_icn_cmt_num.png" />
+          <text wx:if="{{commentscount}}">{{}}</text>
+        </navigator>
+      </view>
+      <view class="pi-act" bindtap="togminfo">
+        <image src="../../Resources/Images/Music/cm2_play_icn_more.png" />
+      </view>
+    </view>
+    <!-- 播放进度条 -->
+    <template is='playingpercent' data='{{playtime:playtime,percent:percent,duration:duration,music:music}}'></template>
+    <!-- 播放控制按钮 -->
+    <view id='playingaction'>
+      <view class="pa-saction" bindtap="playshuffle" hidden="{{shuffle!=1}}">
+        <image src="../../Resources/Images/Music/cm2_icn_loop.png" />
+      </view>
+      <view class="pa-saction" bindtap="playshuffle" hidden="{{shuffle!=2}}">
+        <image src="../../Resources/Images/Music/cm2_icn_one.png" />
+      </view>
+      <view class="pa-saction" bindtap="playshuffle" hidden="{{shuffle!=3}}">
+        <image src="../../Resources/Images/Music/cm2_icn_shuffle.png" />
+      </view>
+      <view class="pa-maction" data-other="-1" bindtap="playother">
+        <image src="../../Resources/Images/Music/ajh.png" />
+      </view>
+      <view class="pa-baction" hidden="{{!playing}}" bindtap="playingtoggle" data-p="{{playing}}">
+        <image id='pa-playing' src="../../Resources/Images/Music/ajd.png" />
+      </view>
+      <view class="pa-baction" hidden="{{playing}}" bindtap="playingtoggle" data-p="{{playing}}">
+        <image id='pa-pause' src="../../Resources/Images/Music/ajf.png" />
+      </view>
+      <view class="pa-maction" data-other="1" bindtap="playother">
+        <image src="../../Resources/Images/Music/ajb.png" />
+      </view>
+      <view class="pa-saction" bindtap="togpinfo">
+        <image src="../../Resources/Images/Music/cm2_icn_list.png" />
+      </view>
+    </view>
+  </view>
+
+</view>
+<!-- show more info -->
+<!-- <template></template> -->
+
+<!-- 播放列表 -->
+<view class='pp_main' hidden='{{!showpinfo}}'>
+  <view class='ppm_header'>
+    <view bindtap='playshuffle' class='pph_cnt_left'>
+      <view hidden="{{shuffle!=1}}">
+        <image src="../../Resources/Images/Music/cm2_icn_loop.png" />
+      </view>
+      <view hidden="{{shuffle!=2}}">
+        <image src="../../Resources/Images/Music/cm2_icn_one.png" />
+      </view>
+      <view hidden="{{shuffle!=3}}">
+        <image src="../../Resources/Images/Music/cm2_icn_shuffle.png" />
+      </view>
+      <text>{{shuffle == 1? '列表循环' : (shuffle == 2 ? '单曲循环' : '随机播放')}} ({{curpl.length}})</text>
+    </view>
+    <view class='pph_cnt_right'>
+      <view bindtap='togainfo'>
+        <image src='../../Resources/Images/Music/cm2_btmlay_btn_fav_dis.png'></image> 
+        <text>收藏</text>
+      </view>
+      <view bindtap='del_all'>
+        <image src='../../Resources/Images/Music/cm2_btmlay_btn_dlt_dis.png'></image> 
+        <text>清空</text>
+      </view>
+    </view>
+  </view>
+
+  <view class='ppm_content'>
+    <scroll-view scroll-y class='songList'>
+      <view class='songs' bindtap='pospl' data-index='{{index}}' wx:for='{{curpl}}' wx:key='{{id}}'>
+          <view class='flexleft'>
+            <block wx:if='{{item.id===music.id}}'>
+              <image src='../../Resources/Images/Music/aal.png'></image>
+            </block>
+            <block wx:else>
+              <text>{{index+1}}</text>
+            </block>
+          </view>
+          <view class='flexmain'>
+              <view>{{item.name}}</view>
+              <view class='relistdes'>{{item.artists[0].name}}</view>
+          </view>
+          <view class='flexright' catchtap='del_curpl' data-index='{{index}}'>
+              <image src='../../Resources/Images/Music/cm2_playlist_icn_dlt.png'></image>
+          </view>
+    </view>
+    </scroll-view>
+  </view>
+  <view class='ppm_footer' bindtap='togpinfo'>关闭</view>
+</view>
+<!-- 音乐详情 -->
+<view class='pp_main' hidden='{{!showminfo}}'>
+  <view class='ppm_header1'>
+    <image src='{{music.al.picUrl}}'></image>
+    <text>{{music.name}} -- {{music.ar[0].name}}</text>
+  </view>
+  <view class='ppm_content'>
+    <view class='menu'>
+      <view class='mn_list' bindtap='togainfo'>
+        <view class='mn_ico'>
+          <image src='../../Resources/Images/Music/cm2_lay_icn_fav_new.png'></image>
+        </view>
+        <view class='cmain'><text>收藏到歌单</text></view>
+      </view>
+      <navigator url='' class='mn_list'>
+        <view class='mn_ico'>
+          <image src='../../Resources/Images/Music/cm2_lay_icn_similar_new.png'></image>
+        </view>
+        <view class='cmain'><text>相似推荐</text></view>
+      </navigator>
+      <navigator url='' class='mn_list'>
+        <view class='mn_ico'>
+          <image src='../../Resources/Images/Music/cm2_lay_icn_artist_new.png'></image>
+        </view>
+        <view class='cmain'><text>歌手: {{music.ar[0].name}}</text></view>
+      </navigator>
+      <navigator url='' class='mn_list'>
+        <view class='mn_ico'>
+          <image src='../../Resources/Images/Music/cm2_lay_order_album_new.png'></image>
+        </view>
+        <view class='cmain'><text>专辑: {{music.al.name}}</text></view>
+      </navigator>
+      <navigator url='' class='mn_list'>
+        <view class='mn_ico'>
+          <image src='../../Resources/Images/Music/cm2_lay_icn_mv_new.png'></image>
+        </view>
+        <view class='cmain'><text>查看MV</text></view>
+      </navigator>
+    </view>
+  </view>
+  <view class='ppm_footer1' bindtap='togminfo'>关闭</view>
+</view>

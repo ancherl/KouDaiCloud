@@ -1,0 +1,18 @@
+<!--Pages/MovieDetail/moviedetail.wxml-->
+ <view wx:if='{{detailData}}' class='content'>
+  <view class='movie_detail_item'>
+    <image src='{{detailData.image}}' mode='aspectFit'></image>
+    <view class='detail'>
+      <view class='rating'>评分: {{detailData.rating.average}}</view>
+      <view class='title'>名称: {{detailData.alt_title}}</view>
+      <view class='director'>导演: {{director}}</view>
+      <view class='casts'>演员: {{casts}}</view>
+      <view class='type'>类型: {{movieType}}</view>
+      <view class='year'>上映年份: {{detailData.attrs.pubdate[0]}}</view>
+    </view>
+    <view class='summary'>
+      <view>简述:</view>
+      <text>{{detailData.summary}}</text>
+    </view>
+  </view>
+  </view>

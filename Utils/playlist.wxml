@@ -1,0 +1,26 @@
+<!-- playlist template  -->
+<template name='playlist'>
+<view class='songList'>
+  <block wx:for='{{list}}' wx:key='id'>
+    <view class='songs {{item.id===curplay.id?"cur":""}}' bindtap='playmusic' data-index='{{index}}'>
+      <navigator url='../Playing/playing?id={{item.id}}&br=999000' >
+          <view class='flexleft'>
+            <block wx:if='{{item.id===curplay.id}}'>
+              <image src='../../Resources/Images/Music/aal.png'></image>
+            </block>
+            <block wx:else>
+              <text>{{index+1}}</text>
+            </block>
+          </view>
+          <view class='flexmain'>
+              <view>{{item.name}}</view>
+              <view class='relistdes'>{{item.artists[0].name}}</view>
+          </view>
+          <view class='flexright' bindtap='showMenuOption'>
+              <image src='../../Resources/Images/Music/cm2_list_btn_more.png'></image>
+          </view>
+      </navigator>
+    </view>
+  </block>
+  </view>
+</template>

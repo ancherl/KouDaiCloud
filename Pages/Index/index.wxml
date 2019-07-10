@@ -1,0 +1,42 @@
+<!--Pages/Index/index.wxml-->
+<!-- Searchbox -->
+<view class='search-container'>
+  <input type='text' placeholder='请输入电影关键字' placeholder-class='input-placeholder' maxlength='15' bindinput='searchInputEvent' bindconfirm='clickConfirmButton' confirm-type='search' value='{{inputInitialValue}}'></input>
+  <icon class='search' bindtap='searchClickEvent' type='search' size='20'></icon>
+  <icon class='close' type='clear' size='21' style='display:{{clearIconDisplay}}' bindtap='clearClickEvent'></icon>
+</view>
+
+<view class='logo' wx:if='{{totalRecord == 0}}'>
+  <image src='../../Resources/Images/movie_logo.png'></image>
+  <view><text>没有找到相关资源!</text></view>
+</view>
+
+<!-- Movie Records -->
+<scroll-view scroll-y bindscrolltolower='scrolltolower' style='height:{{scrollHeight}}px'>
+  <view class='common-list' wx:if='{{totalRecord > 0}}'>
+    <block wx:for='{{pageRows}}' wx:key='{{id}}'>
+      <view class='list-item' data-mid='{{item.id}}' bindtap="toDetailPage">
+        <view class='index-list-item'>
+          <view class='cover'>
+             <image class='cover-img' src='{{item.images.large}}'></image>
+          </view>
+          <view class='content'>
+            <view class='title'>名称: {{item.title}}</view>
+            <view class='genres'>类型: {{item.genres}}</view>
+            <view wx:if='{{item.countries[0]}}' class='country'>上映日期: {{item.countries[0]}}</view>
+            <view wx:if='item.pubdates[0]' class='country'>{{item.pubdates[0]}}</view>
+            <view wx:if='{{item.summary}}' class='summary'>简述: {{item.summary}}</view>
+            <view wx:if='{{item.durations}}' class='durations'>时长: {{item.durations[0]}}</view>
+            <view class='rating'>评分: {{item.rating.average}}</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</scroll-view>
+
+
+
+
+
+

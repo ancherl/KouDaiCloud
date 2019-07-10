@@ -1,0 +1,38 @@
+// 整数保留两位小数
+function toFix(value){
+  return parseFloat(value).toFixed(2);
+}
+
+// 过滤掉 ?param400y400 from music url
+function extractMusicUrl(value){
+  if(value !== undefined){
+    return value.split('?')[0];
+  }
+}
+
+// 从数组中随机选取指定数量的元素
+function firArrSelector(arr, num){
+  return arr.slice(0,num);
+}
+
+function formatNumber(n){
+  n = n.toString();
+
+  return n.length ===1 ? '0' + n : n;
+}
+
+// Unix时间戳转换为当前时间 1561791825559 (ms) => 2019/6/27 5:56:19
+function convertUnixTimestamp(timestamp){
+  var date = getDate(timestamp);
+
+  return date.getFullYear() + '/' + date.getMonth() + '/' + date.getDay() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+  
+}
+
+
+module.exports={
+  toFix: toFix,
+  extractMusicUrl: extractMusicUrl,
+  firArrSelector: firArrSelector,
+  convertUnixTimestamp: convertUnixTimestamp
+}

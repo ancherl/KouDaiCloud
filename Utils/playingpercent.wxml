@@ -1,0 +1,8 @@
+<!-- 音乐播放进度条 -->
+<template name='playingpercent'>
+  <view id='playing-status'>
+    <text class='playtime'>{{playtime}}</text>
+    <slider bindchange='museek' backgroundColor='#e9e9e9' activeColor='#c20b0d' left-icon='cancel' value='{{percent}}' block-size='12' min='0' max='{{music.dt*0.001}}'></slider>
+    <text class='duration'>{{duration}}</text>
+  </view>
+</template>

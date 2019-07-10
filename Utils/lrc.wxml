@@ -1,0 +1,22 @@
+<!-- 歌词显示 -->
+<template name="lrc">
+  <view id="lrclist" class="{{!showlrc?'playinghidden':''}}" bindtap="loadlrc" style="overflow:{{lrc.scroll?'auto':'hidden'}}">
+    <view id="lrcwrap" hidden="{{!lrc}}">
+      <!-- <view wx:if="{{lrc.nolyric}}" class="notext">纯音乐，无歌词</view>
+      <view wx:if="{{lrc.scroll&&!lrc.nolyric&&!lrc.uncollected}}" class="notext">*歌词不支持滚动*</view>
+      <view wx:if="{{lrc.uncollected}}" class="notext">暂无歌词</view> -->
+    <scroll-view scroll-y style='height: 500px' scroll-into-view='{{toView}}'>
+      <view wx:for-items="{{lrc.lrc}}" wx:key="{{item.lrc_sec}}" wx:for-index="idx" id='lrcindex-{{item.lrc_sec}}' class="{{('lrcindex-'+item.lrc_sec==toView)&&!lrc.scroll?'lrcur':''}}">
+        <text data-time="{{item.lrc_sec}}">{{item.lrc}}</text>
+      </view>
+    </scroll-view>
+    </view>
+    <view hidden="{{lrc.lrc.length>0}}" class="cntloading">***暂无歌词***
+      <view>
+        <text class="cl1"></text>
+        <text class="cl2"></text>
+        <text class="cl3"></text>
+      </view>
+    </view>
+  </view>
+</template>

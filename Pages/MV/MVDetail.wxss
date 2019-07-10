@@ -1,0 +1,146 @@
+/* Pages/MV/MVDetail.wxss */
+#mvpage {
+  background-color: #fbfcfd;
+  height: 100%;
+  padding-top: 401rpx; 
+  box-sizing: border-box
+}
+#mvheader #mvideo {
+  height: 400rpx;
+  width: 100%;
+}
+#mvheader {
+  flex: 0 0 320rpx;
+  margin-top: -401rpx;
+}
+#mvpage .tab {
+  height: 81rpx;
+  width: 100%;
+  margin-top: -5px 
+}
+
+#mvmain {
+  background-color:#c20b0d;
+  height: 100%
+}
+#mvmain .tab-cnt{
+  height:100%;
+  background-color: #fff
+}
+#mvinfo, #mvdes{
+  padding:24rpx;
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.8
+}
+#mvdes {
+  border-top: 1rpx solid #eee;
+}
+#mvname {
+  font-size: 34rpx;
+  white-space: 2rpx;
+  color: #000;
+  padding-bottom: 16rpx; 
+  display: block
+}
+#mvinfo navigator {
+  color:#537fb0
+}
+
+.tab {
+  display: flex;
+  justify-content: space-around;
+}
+.tab .tab-item {
+  flex: auto;
+  text-align: center;
+  border-right: 0.5px solid #f5f5f5;
+}
+.tab .tab-item image {
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+  margin-top: 5px;
+  float: left;
+}
+.tab .tab-item .tbi-text {
+  font-size: 35rpx;
+  margin-top: 7px;
+  color: #666;
+  margin-left: 15px;
+}
+.tab .tbi-cur {
+  border-bottom: 1px solid #c20b0d;
+  background-color: #e9e9e9;
+}
+
+.tab-cnt {
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+}
+.tab-cnt .sm_title {
+  font-size: 30rpx;
+  color: #666;
+  margin: 10px;
+}
+.tab-cnt .rec_list{
+  margin-top: 10rpx;
+}
+.tab-cnt .rec_list .rec_avatar{
+  width: 51px;
+  height: 51px;
+  text-align: center;
+  float: left;
+}
+.tab-cnt .rec_list .rec_avatar image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+.tab-cnt .rec_list .rec_main{
+  margin-left: 55px;
+  margin-right: 0px;
+  width: 85%;
+  border-bottom: 1px solid #eee;
+}
+.tab-cnt .rec_list .rec_main .rm_header .fmh_name {
+  font-size: 30rpx;
+  color: #666;
+}
+.tab-cnt .rec_list .rec_main .rm_header .fmh_time {
+  font-size: 25rpx;
+  color: #666;
+}
+.tab-cnt .rec_list .rec_main .rm_header text {
+  font-size: 30rpx;
+  color: #666;
+  float: right;
+  margin-top: 5rpx;
+}
+.tab-cnt .rec_list .rec_main .rm_header image{
+  width: 40rpx;
+  height: 40rpx;
+  color: #666;
+  float: right;
+}
+.tab-cnt .rec_list .rec_main .WxEmojiView text{
+  font-size: 25rpx;
+}
+.rm_cnt text{
+  font-size: 32rpx;
+}
+.replyname {
+  font-size: 32rpx;
+}
+
+
+
+
+
+
+
+
+
+

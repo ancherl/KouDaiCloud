@@ -1,0 +1,55 @@
+<!--Pages/PageList/playlist.wxml-->
+<import src='../../Utils/playlist.wxml' />
+<wxs src="../../WXS/common.wxs" module="commons" />
+
+<!-- header -->
+<view class='plist-header' style='background:url({{cover}}' >
+  <view id='plh-main'>
+    <view id='plh-cover'>
+      <image class='music_cover' src='{{cover}}'></image>
+      <view class='img_playcount'>
+        <image src='../../Resources/Images/Music/p0.png' style='width:24rpx;height:24rpx;'></image>{{commons.toFix(playcount/10000)}}万
+      </view>
+      <view id='plh-playinfo' bindtap='plinfo'>
+        <image src='../../Resources/Images/Music/cm2_list_detail_icn_infor.png'></image>
+      </view>
+    </view>
+    <view id='plh-cnt'>
+      <text id='music_h_name'>{{songListName}}</text>
+    </view>
+  </view>
+
+  <view id='plh_action'>
+    <view>
+      <image src='../../Resources/Images/Music/cm2_list_detail_icn_fav_new.png'></image>
+      <text>收藏</text>
+    </view>
+    <view>
+      <navigator url=''>
+        <image src='../../Resources/Images/Music/cm2_list_detail_icn_cmt.png'></image>
+        <text>评论</text>
+      </navigator>
+    </view>
+    <view>
+      <image src='../../Resources/Images/Music/cm2_list_detail_icn_share.png'></image>
+      <text>分享</text>
+    </view>
+  </view>
+</view>
+
+<!-- Play List detail -->
+<view class='plist-detail'>
+  <block wx:if='{{list.length > 0}}'>
+    <view id='playall' bindtap='playall' class='playall'>
+      <view class='flexleft'>
+        <image src='../../Resources/Images/Music/pl-playall.png'></image>
+      </view>
+      <view class='flexlist'>
+        <text id='pa-count'>播放全部<text>(共{{list.length}}首)</text></text>
+      </view>
+    </view>
+  <!-- 引用模版 -->
+  <template is='playlist' data='{{list:list,curplay:curplay}}'></template>
+
+  </block>
+</view>

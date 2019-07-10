@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {},
+  "navigationBarTitleText":"口袋云音乐",
+  "navigationBarBackgroundColor": "#c20b0d",
+  "enablePullDownRefresh": true
+}

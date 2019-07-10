@@ -1,0 +1,55 @@
+<!--Pages/MV/MVDetail.wxml-->
+<import src='../../Utils/commentslist.wxml' />
+
+<view id="mvpage">
+  <view id="mvheader">
+    <video id="mvideo" src="{{mvURL}}" autoplay="{{wifi}}" poster="{{coverImg}}" title="{{mvDetail.name}}" enable-play-gesture show-mute-btn></video>
+  </view>
+  <view class="tab">
+    <view class="tab-item {{tab==0 ? 'tbi-cur':''}}" bindtap="tab" data-tab="0">
+      <image src='../../Resources/Images/Music/cm2_lay_order_album_new.png'></image>
+      <view class="tbi-text"><text>详情</text></view>
+    </view>
+    <view class="tab-item {{tab==1 ? 'tbi-cur':''}}" bindtap="tab" data-tab="1">
+      <image src='../../Resources/Images/Music/cm2_lay_icn_similar_new.png'></image>
+      <view class="tbi-text"><text>评论</text></view>
+    </view>
+    <view class="tab-item {{tab==2 ? 'tbi-cur':''}}" bindtap="tab" data-tab="2">
+      <image src='../../Resources/Images/Music/cm2_lay_icn_mv_new.png'></image>
+      <view class="tbi-text"><text>相关MV</text></view>
+    </view>
+  </view>
+
+  <view id="mvmain">
+    <!-- mv详情 -->
+    <view class="tab-cnt" id="mv-detail" wx:if="{{tab==0}}">
+      <view id="mvinfo">
+        <text id="mvname">{{mvDetail.name}}</text>
+        <view>
+          <navigator url="../artist/index?id={{main.artistId}}"> 歌手：{{mvDetail.artists[0].name}}</navigator>
+        </view>
+        <view>播放：{{mvDetail.playCount}}</view>
+      </view>
+      <view id="mvdes">
+        <view class="fc_gray">发行：{{mvDetail.publishTime}}</view>
+        <view>{{mvDetail.briefDesc}}</view>
+        <view>{{mvDetail.desc}}</view>
+      </view>
+    </view>
+    <!-- 评论列表 -->
+    <view class="tab-cnt" id="mv-detail" wx:if="{{tab==1}}">
+      <scroll-view id="mv-comment" bindscrolltolower="loadmore" style="height:{{windowHeight-250}}px" scroll-y="true" lower-threshold="20">
+        <template is="commentslist" data="{{hotComments:hotComments, comments:comments, totalComments: totalComments, commons: commons}}" />
+      </scroll-view>
+    </view>
+    <!-- 相似mv  -->
+    <view class="tab-cnt" id="mv-detail" wx:if="{{tab==2}}">
+      <scroll-view style="height:100%;" scroll-y>
+        <view class="flex-boxlist mvs">
+          <!-- 相似mv 列表 -->
+        </view>
+      </scroll-view>
+    </view>
+
+  </view>
+</view>

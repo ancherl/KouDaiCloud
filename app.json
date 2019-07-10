@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "Pages/Music/music",
+    "Pages/Index/index",
+    "Pages/Book/book",
+    "Pages/MovieDetail/moviedetail",
+    "Pages/FM/fm",
+    "Pages/PlayList/playlist",
+    "Pages/Playing/playing",
+    "Pages/MV/MVDetail"
+  ],
+  "window": {
+    "navigationBarTitleText": "口袋云电影",
+    "navigationBarBackgroundColor": "#3481EB"
+  },
+  "tabBar": {
+    "color": "#AAAAAA",
+    "selectedColor": "#3481EB",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "text": "电影",
+        "pagePath": "Pages/Index/index",
+        "iconPath": "Resources/Images/movie.png",
+        "selectedIconPath": "Resources/Images/movie_selected.png"
+      },
+      {
+        "text": "音乐",
+        "pagePath": "Pages/Music/music",
+        "iconPath": "Resources/Images/music.png",
+        "selectedIconPath": "Resources/Images/music_selected.png"
+      },
+      {
+        "text": "书籍",
+        "pagePath": "Pages/Book/book",
+        "iconPath": "Resources/Images/book.png",
+        "selectedIconPath": "Resources/Images/book_selected.png"
+      }
+    ]
+  },
+  "requiredBackgroundModes": [
+    "audio"
+  ],
+  "sitemapLocation": "sitemap.json"
+}
