@@ -25,3 +25,8 @@ Cloud Movie:
 ![image](https://github.com/ancherl/KouDaiCloud/raw/master/Resources/Images/ReadmeImages/7.png)     
 2) 电影详情页:       
 ![image](https://github.com/ancherl/KouDaiCloud/raw/master/Resources/Images/ReadmeImages/8.png)     
+    
+    
+    
+    
+# 功能待完善, 有兴趣的伙伴们可以一起加入进来研究微信小程序 #
